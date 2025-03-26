@@ -1,0 +1,105 @@
+import React, { useState } from 'react';
+
+const WebResourcesNav = () => {
+  const [activeSection, setActiveSection] = useState('demand');
+
+  const sections = {
+    demand: {
+      title: '需求收集和关键词调研',
+      resources: [
+        { name: '谷歌下拉词', tool: 'Search Suggest', link: 'https://www.searchsuggest.tips/?keyword=' },
+        { name: 'AI 工具排行榜', tool: 'Toolify 榜单', link: 'https://www.toolify.ai/Best-AI-Tools-revenue' },
+        { name: 'AI 导航站用户需求', tool: 'There\'s an AI for That - Requests', link: 'https://theresanaiforthat.com/requests' },
+        { name: '关键词难度查询', tool: 'Ahrefs Keyword Difficulty', link: 'https://ahrefs.com/keyword-difficulty' }
+      ]
+    },
+    essential: {
+      title: '上站必备',
+      resources: [
+        { name: '域名查询', tool: 'Lean Domain Search', link: 'https://leandomainsearch.com' },
+        { name: '域名查询', tool: 'Query Domains', link: 'https://query.domains' },
+        { name: '域名查询', tool: 'Instant Domain Search', link: 'https://instantdomainsearch.com/?q=' },
+        { name: '域名注册', tool: 'Spaceship', link: 'https://spaceship.com' },
+        { name: '域名注册', tool: 'Porkbun', link: 'https://porkbun.com' },
+        { name: '域名注册', tool: 'Namecheap', link: 'https://namecheap.com' },
+        { name: '托管&代码管理', tool: 'GitHub', link: 'https://github.com' },
+        { name: '托管&CDN', tool: 'Cloudflare', link: 'https://cloudflare.com' },
+        { name: '托管', tool: 'Vercel', link: 'https://vercel.com' },
+        { name: '数据后台', tool: 'Google Search Console', link: 'https://search.google.com/search-console' },
+        { name: '数据后台', tool: 'Google Analytics', link: 'https://analytics.google.com' },
+        { name: '数据后台', tool: 'Bing Webmaster', link: 'https://www.bing.com/webmasters/submit' }
+      ]
+    },
+    competitors: {
+      title: '竞品调研',
+      resources: [
+        { name: '查看流量和网页关键词', tool: 'AIDTK', link: 'https://aitdk.com' },
+        { name: '查看外链', tool: 'Ahrefs 免费工具', link: 'https://ahrefs.com/free-seo-tools' },
+        { name: '查看网站关键词', tool: 'Semrush', link: 'https://semrush.com' }
+      ]
+    },
+    templates: {
+      title: '上站模版',
+      resources: [
+        { name: '开源动态博客模板', tool: 'Cloudflare + Workers', link: 'https://github.com/openRin/Rin' },
+        { name: 'NextJS + App Router Starter', tool: 'Next.js Boilerplate', link: 'https://github.com/ixartz/Next-js-Boilerplate' },
+        { name: 'SaaS Boilerplate', tool: 'NextJS + Tailwind', link: 'https://github.com/ixartz/Saas-Boilerplate' },
+        { name: '免费落地页模板', tool: 'Next.js Landing Page', link: 'https://github.com/ixartz/Next-JS-Landing-Page-Starter-Template' },
+        { name: 'Astro博客模版', tool: 'Astro Boilerplate', link: 'https://github.com/ixartz/Astro-boilerplate' }
+      ]
+    },
+    news: {
+      title: '资讯部分',
+      resources: [
+        { name: 'Reddit 子社区（AI创业）', tool: 'Notion List', link: 'https://liberating-doll-b8a.notion.site/Reddit-1a8e8aed91b8021893ecba8b74e530b' },
+        { name: '谷歌内容创作指南', tool: 'Google Developers', link: 'https://developers.google.com/search/docs/fundamentals/creating-helpful-content' },
+        { name: 'Ahrefs 趋势网站榜', tool: 'Ahrefs Trending', link: 'https://ahrefs.com/websites#trending' },
+        { name: 'Starter Story Premium Report', tool: 'Google Sheets', link: 'https://docs.google.com/spreadsheets/d/1eUni4qPURML2WFPKXzNmm-WKuaum9_ynSFo_Q74M/edit?gid=83151001' }
+      ]
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-gray-100 p-6">
+      <div className="max-w-6xl mx-auto">
+        <h1 className="text-3xl font-bold text-center mb-8">Web 开发资源导航</h1>
+        
+        <div className="flex mb-6">
+          {Object.keys(sections).map((sectionKey) => (
+            <button
+              key={sectionKey}
+              className={`px-4 py-2 mr-2 rounded ${
+                activeSection === sectionKey 
+                  ? 'bg-blue-600 text-white' 
+                  : 'bg-gray-200 text-gray-800 hover:bg-gray-300'
+              }`}
+              onClick={() => setActiveSection(sectionKey)}
+            >
+              {sections[sectionKey].title}
+            </button>
+          ))}
+        </div>
+
+        <div className="bg-white shadow-md rounded-lg p-6">
+          <h2 className="text-2xl font-semibold mb-4">{sections[activeSection].title}</h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {sections[activeSection].resources.map((resource, index) => (
+              <a 
+                key={index} 
+                href={resource.link} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="block p-4 border rounded-lg hover:bg-gray-50 transition-colors"
+              >
+                <h3 className="font-bold text-lg">{resource.name}</h3>
+                <p className="text-gray-600">{resource.tool}</p>
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default WebResourcesNav;
